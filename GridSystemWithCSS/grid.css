@@ -50,3 +50,9 @@
         max-width: 1320px;
     }
 }
+
+/* Row giúp các cột nằm trên cùng 1 hàng, nhưng nếu độ rộng vượt quá 100% thì nó sẽ bị rớt xuống  */
+.row {
+    display: flex;
+    flex-wrap: wrap; /*Độ rộng các cột cộng lại vượt quá 100% thì sẽ bị rớt xuống*/
+}
