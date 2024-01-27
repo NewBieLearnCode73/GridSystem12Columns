@@ -2,6 +2,7 @@
 /*No media query for `xs` since this is the default in Bootstrap*/
 .container {
     --column-size: 12;
+    --spacer: 30px;
 
     width: 100%;
     /* Căn giữa thành phần */
@@ -27,12 +28,21 @@
     1 cột chỉ chứa độ rộng là 12 column, nếu như bên trong row chúng ta khai báo 3 thẻ div với col-4 col-8 col-9 
     thì col-9 sẽ bị rơi xuống dòng mới do vượt quá 12 columns ---> Cần dùng flex-wrap 
     */
+
+    /* Bù lại phần dư ra khi padding trái phải */
+    margin-left: calc(-1 * var(--spacer) / 2);
+    margin-right: calc(-1 * var(--spacer) / 2);
 }
 
 /* Xây dựng columns */
 .col {
     flex: 1 0; /*Các item sẽ bằng nhau, và tự động giãn ra khi đủ không gian do shrink bằng 0 nên sẽ không co lại*/
     /* Đây được xem là các trường hợp còn lại sau khi dùng sm, xl, lg,..*/
+}
+
+/* Xây dựng gutter */
+.g-0 {
+    --spacer: 0;
 }
 
 /* Xây dựng 1 đến 12 */
@@ -44,7 +54,7 @@
 - Các class bắt đầu bằng col- chỉ cần khai báo biến mà thôi
 */
 .row > [class*="col-"] {
-    flex: 0 0 auto;
+    flex: 0 0 auto; /*Các cột không bằng nhau, các cột không được co lại mà phải lấp đầy toàn bộ hàng đó, Kích thước của phần tử sẽ dựa vào nội dung bên trong nó */
     width: calc(100% / var(--column-size) * var(--column-number));
 }
 
@@ -101,6 +111,8 @@
 .row[class*="row-cols-"] > * {
     flex: 0 0 auto;
     width: calc(100% / var(--row-cols-number));
+    padding-left: calc(var(--spacer) / 2);
+    padding-right: calc(var(--spacer) / 2);
 }
 
 .row-cols-1 > * {
