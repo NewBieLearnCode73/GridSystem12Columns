@@ -1,7 +1,11 @@
 /*X-Small devices (portrait phones, less than 576px)*/
 /*No media query for `xs` since this is the default in Bootstrap*/
-.container {
+
+/* Mặc định fluid nó sẽ chiếm 100% không tính lề khi media query*/
+.container,
+.container-fluid {
     --column-size: 12;
+    --spacer: 10px;
 
     width: 100%;
     /* Căn giữa thành phần */
@@ -9,13 +13,8 @@
     margin-right: auto;
 
     /* padding trái phải giữa chữ bên trong và container */
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Mặc định nó sẽ chiếm 100% không tính lề khi media query*/
-.container-fluid {
-    width: 100%;
+    padding-left: calc(-1 * var(--spacer) / 2);
+    padding-right: calc(-1 * var(--spacer) / 2);
 }
 
 /* Row giúp các cột nằm trên cùng 1 hàng, nhưng nếu độ rộng vượt quá 100% thì nó sẽ bị rớt xuống  */
@@ -37,6 +36,10 @@
 .col {
     flex: 1 0; /*Các item sẽ bằng nhau, và tự động giãn ra khi đủ không gian do shrink bằng 0 nên sẽ không co lại*/
     /* Đây được xem là các trường hợp còn lại sau khi dùng sm, xl, lg,..*/
+
+    /* Thêm padding trái phải */
+    padding-left: calc(var(--spacer) / 2);
+    padding-right: calc(var(--spacer) / 2);
 }
 
 /* Xây dựng gutter */
@@ -96,6 +99,39 @@
 
 .offset-11 {
     --offset-number: 11;
+}
+
+/* ROW-COLS  */
+
+.row[class*="row-cols-"] > * {
+    flex: 0 0 auto;
+    width: calc(100% / var(--row-cols-number));
+    padding-left: calc(var(--spacer) / 2);
+    padding-right: calc(var(--spacer) / 2);
+}
+
+.row-cols-1 > * {
+    --row-cols-number: 1;
+}
+
+.row-cols-2 > * {
+    --row-cols-number: 2;
+}
+
+.row-cols-3 > * {
+    --row-cols-number: 3;
+}
+
+.row-cols-4 > * {
+    --row-cols-number: 4;
+}
+
+.row-cols-5 > * {
+    --row-cols-number: 5;
+}
+
+.row-cols-6 > * {
+    --row-cols-number: 6;
 }
 
 /* Xây dựng 1 đến 12 */
@@ -161,44 +197,15 @@
     --column-number: 12;
 }
 
-/* ROW-COLS  */
-
-.row[class*="row-cols-"] > * {
-    flex: 0 0 auto;
-    width: calc(100% / var(--row-cols-number));
-    padding-left: calc(var(--spacer) / 2);
-    padding-right: calc(var(--spacer) / 2);
-}
-
-.row-cols-1 > * {
-    --row-cols-number: 1;
-}
-
-.row-cols-2 > * {
-    --row-cols-number: 2;
-}
-
-.row-cols-3 > * {
-    --row-cols-number: 3;
-}
-
-.row-cols-4 > * {
-    --row-cols-number: 4;
-}
-
-.row-cols-5 > * {
-    --row-cols-number: 5;
-}
-
-.row-cols-6 > * {
-    --row-cols-number: 6;
-}
-
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
     .container {
-        --spacer: 10px;
+        --spacer: 24px;
         max-width: 540px;
+    }
+
+    .g-sm-0 {
+        --spacer: 0;
     }
 
     .offset-sm-0 {
@@ -327,6 +334,10 @@
 @media (min-width: 768px) {
     .container {
         max-width: 720px;
+    }
+
+    .g-md-0 {
+        --spacer: 0;
     }
 
     .offset-md-0 {
@@ -458,6 +469,10 @@
         max-width: 960px;
     }
 
+    .g-lg-0 {
+        --spacer: 0;
+    }
+
     .offset-lg-0 {
         --offset-number: 0;
     }
@@ -586,6 +601,10 @@
         max-width: 1170px;
     }
 
+    .g-xl-0 {
+        --spacer: 0;
+    }
+
     .offset-xl-0 {
         --offset-number: 0;
     }
@@ -712,6 +731,10 @@
 @media (min-width: 1400px) {
     .container {
         max-width: 1320px;
+    }
+
+    .g-xxl-0 {
+        --spacer: 0;
     }
 
     .offset-xxl-0 {
